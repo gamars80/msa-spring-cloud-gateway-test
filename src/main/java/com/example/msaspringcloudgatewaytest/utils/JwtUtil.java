@@ -27,7 +27,7 @@ public class JwtUtil {
             throw new RuntimeException("Invalid JWT token");
         }
     }
-
+    
     public static boolean isTokenExpired(Claims claims) {
         return claims.getExpiration().before(new Date());
     }

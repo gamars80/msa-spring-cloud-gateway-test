@@ -21,7 +21,7 @@ public class GatewayConfig {
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("user", predicateSpec -> predicateSpec
-                        .path("/api/v1/auth","/login")
+                        .path("/api/v1/auth/login")
                         .and().method(HttpMethod.POST)
                         .filters(gatewayFilterSpec -> gatewayFilterSpec
                                 .removeRequestHeader(HttpHeaders.COOKIE)
@@ -29,12 +29,13 @@ public class GatewayConfig {
                         .uri("lb://MSA-USER-API-TEST")
                 )
                 .route("board", predicateSpec -> predicateSpec
-                        .path("/board/**")
-                        .filters(gatewayFilterSpec -> gatewayFilterSpec
-                                .removeRequestHeader(HttpHeaders.COOKIE)
-                                .filter(jwtAuthenticationFilter)
-                        )
-                        .uri("lb://MSA-BOARD-API-TEST")
+                                .path("/api/v1/board/**")
+                                .filters(gatewayFilterSpec -> gatewayFilterSpec
+                                                .removeRequestHeader(HttpHeaders.COOKIE)
+                                                .filter(jwtAuthenticationFilter)
+//                                .filter(roleCheckGatewayFilter)
+                                )
+                                .uri("lb://MSA-BOARD-API-TEST")
                 )
                 .build();
     }

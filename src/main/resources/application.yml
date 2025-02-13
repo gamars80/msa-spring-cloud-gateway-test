@@ -10,5 +10,27 @@ eureka:
 spring:
   main:
     web-application-type: reactive
+    allow-bean-definition-overriding: true
   application:
     name: msa-spring-cloud-gateway-test
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+
+#cloud:
+#  gateway:
+#    routes:
+#      - id: user
+#        uri: lb://MSA-USER-API-TEST
+#        predicates:
+#          - Path=/api/v1/auth/**
+#      - id : board
+#        uri : lb://MSA-BOARD-API-TEST
+#        predicates:
+#          - Path=/api/v1/board/**
+#      - id: contents
+#        uri : lb://MSA-CONTENTS-API-TEST
+#        predicates:
+#          - Path=/contents/**

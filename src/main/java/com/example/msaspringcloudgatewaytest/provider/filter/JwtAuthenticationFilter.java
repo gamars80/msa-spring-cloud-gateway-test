@@ -37,7 +37,6 @@ public class JwtAuthenticationFilter implements GatewayFilter {
                     .mutate()
                     .header("userId", claims.getSubject())
                     .build();
-
         } catch (Exception e) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
